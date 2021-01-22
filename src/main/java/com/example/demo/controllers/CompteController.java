@@ -31,6 +31,12 @@ public class CompteController {
 		return this.comptes.get(id);
 	}
 	
+	@PostMapping() //localhost:8080/comptes --> POST
+	public Compte create(@RequestBody Compte compte) {
+		this.comptes.add(compte);
+		return compte;
+	}
+	
 	//UPDATE
 	@PutMapping("/{id}") //localhost:8080/id --> PUT
 	public Compte udpate(@PathVariable int id,@RequestBody Compte compte) {
@@ -66,12 +72,17 @@ public class CompteController {
 	 * @param id
 	 * @param montant
 	 * @return
+	 * @throws Exception 
 	 */
-	@PostMapping("/{id}/ajouter/{montant}") 
-	public Compte retirerMontant(@PathVariable int id, @PathVariable int montant) {
+	@PostMapping("/{id}/retirer/{montant}") 
+	public Compte retirerMontant(@PathVariable int id, @PathVariable int montant) throws Exception {
 		Compte newCompte = findById(id);
-		
-		newCompte.retirer(montant);
+		if (newCompte.getSolde() >0) {
+			newCompte.retirer(montant);
+		}else
+		{
+			throw new Exception ("Votre solde n'est pas suffisant pour retirer ce montant");
+		}
 		
 		return newCompte;
 	}
