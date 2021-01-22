@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,7 +30,7 @@ public class CompteController {
 		return this.comptes.get(id);
 	}
 	
-	//CREATE
+	//UPDATE
 	@PutMapping("/{id}") //localhost:8080/id --> PUT
 	public Compte udpate(@PathVariable int id,@RequestBody Compte compte) {
 		Compte newCompte = findById(id);
@@ -37,6 +38,14 @@ public class CompteController {
 		newCompte.setSolde(compte.getSolde());
 		return newCompte;
 	}
+	
+	//DELETE 
+	@DeleteMapping("/{id}") 
+	public Compte delete(@PathVariable int id) {
+		return this.comptes.remove(id);
+	}
+	
+	
 	
 	/**
 	 * Methode qui creer et retourne une liste instanciée de comptes
