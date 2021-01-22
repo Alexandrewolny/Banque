@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,37 @@ public class CompteController {
 	public Compte delete(@PathVariable int id) {
 		return this.comptes.remove(id);
 	}
+	
+	/**
+	 * Cette méthode permet de rajouter un montant au compte
+	 * @param id
+	 * @param montant
+	 * @return
+	 */
+	@PostMapping("/{id}/ajouter/{montant}") 
+	public Compte ajouterMontant(@PathVariable int id, @PathVariable int montant) {
+		Compte newCompte = findById(id);
+		
+		newCompte.ajouter(montant);
+		
+		return newCompte;
+	}
+	
+	/**
+	 * Cette methode permet de retirer un montant du compte
+	 * @param id
+	 * @param montant
+	 * @return
+	 */
+	@PostMapping("/{id}/ajouter/{montant}") 
+	public Compte retirerMontant(@PathVariable int id, @PathVariable int montant) {
+		Compte newCompte = findById(id);
+		
+		newCompte.retirer(montant);
+		
+		return newCompte;
+	}
+	
 	
 	
 	
