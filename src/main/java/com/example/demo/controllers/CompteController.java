@@ -77,7 +77,7 @@ public class CompteController {
 	@PostMapping("/{id}/retirer/{montant}") 
 	public Compte retirerMontant(@PathVariable int id, @PathVariable int montant) throws Exception {
 		Compte newCompte = findById(id);
-		if (newCompte.getSolde() >0) {
+		if (newCompte.getSolde() > montant) {
 			newCompte.retirer(montant);
 		}else
 		{
@@ -86,9 +86,6 @@ public class CompteController {
 		
 		return newCompte;
 	}
-	
-	
-	
 	
 	/**
 	 * Methode qui creer et retourne une liste instanciée de comptes

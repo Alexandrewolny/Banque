@@ -31,13 +31,14 @@ public class CompteRemunere extends Compte {
 	 * @return
 	 */
 	public double calculerInterets() {
-		return taux; //TODO
+		return super.getSolde() * this.taux;
 	}
 	
 	/**
 	 * Cette methode ajoute au solde la totalité des interets
 	 */
 	public void verserInterets() {
+		super.ajouter(this.calculerInterets());
 		
 	}
 	
